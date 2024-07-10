@@ -18,7 +18,7 @@ This Oh My Zsh plugin provides convenient aliases for managing Conda environment
 
 2. Clone this repository:
    ```
-   git clone https://github.com/ItaiMaoz/omz_conda_plugin.git
+   git clone https://github.com/ItaiMaoz/conda-auto-env.git
    ```
 
 3. Add the plugin to your Oh My Zsh configuration. Open your `~/.zshrc` file and add `conda-auto-env` to your plugins list:
