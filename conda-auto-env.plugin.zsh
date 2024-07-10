@@ -59,7 +59,14 @@ conda_remove_env() {
   fi
 }
 
+# Function to create and activate conda environment
+conda_create_activate_env() {
+  conda_create_env "$@"
+  conda_activate_env
+}
+
 # Create aliases
 alias ccenv='conda_create_env'
 alias caenv='conda_activate_env'
 alias crenv='conda_remove_env'
+alias ccaenv='conda_create_activate_env'
