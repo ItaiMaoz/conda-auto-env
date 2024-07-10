@@ -35,6 +35,31 @@ conda_activate_env() {
   fi
 }
 
+# Function to remove conda environment based on current directory name
+conda_remove_env() {
+  local env_name=$(basename "$PWD")
+
+  if conda env list | grep -q "^$env_name "; then
+    echo "Removing environment: $env_name"
+    read -q "REPLY?Are you sure you want to remove this environment? (y/n) "
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      # Check if the environment is currently active
+      if [[ "$CONDA_DEFAULT_ENV" == "$env_name" ]]; then
+        echo "Deactivating environment '$env_name' before removal."
+        conda deactivate
+      fi
+      conda env remove -n "$env_name" -y
+      echo "Environment '$env_name' has been removed."
+    else
+      echo "Operation cancelled. Environment '$env_name' was not removed."
+    fi
+  else
+    echo "Environment '$env_name' does not exist."
+  fi
+}
+
 # Create aliases
 alias ccenv='conda_create_env'
 alias caenv='conda_activate_env'
+alias crenv='conda_remove_env'
